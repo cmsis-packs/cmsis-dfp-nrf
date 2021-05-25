@@ -1,16 +1,16 @@
 #!/bin/bash
 
-name=cmsis-dfp-template
-vendor=template
-version=0.0
-source_url=
+name=cmsis-dfp-nrf
+vendor=NordicSemiconductor
+version=8.38.0
+source_url=https://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/$vendor.nRF_DeviceFamilyPack.$version.pack
 
 build_dir='cmsis_build'
 deploy_dir='cmsis_deploy'
 
 prepare() {
     echo "preparing..." 
-    
+
     if [ -z "$build_dir" ]
     then
         echo " var\$build_dir is empty"
@@ -22,7 +22,7 @@ prepare() {
         echo "var \$deploy_dir is empty"
         exit
     fi
-    
+
     mkdir -p $build_dir
     mkdir -p $deploy_dir
 
@@ -55,8 +55,10 @@ extract() {
 
 deploy() {
     echo "deploying..."
-    cp -r $build_dir/example $deploy_dir
-    cp $build_dir/example.txt $deploy_dir
+    cp -r $build_dir/Device $deploy_dir
+    cp -r $build_dir/Flash $deploy_dir
+    cp -r $build_dir/License $deploy_dir
+    cp -r $build_dir/SVD $deploy_dir
 }
 
 prepare
